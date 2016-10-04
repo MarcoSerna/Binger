@@ -44,13 +44,15 @@ public class MainScreen extends AppCompatActivity {
             }
         });
 
+        imageSwitcher.setImageResource(imageNo[currentImage]);
+        currentImage++;
+
         FloatingActionButton fab1 = (FloatingActionButton) findViewById(R.id.red);
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 //now set the code to change images as per rule
-
 
                 if(currentImage == countImage)
                     currentImage = 0;
