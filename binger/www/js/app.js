@@ -25,7 +25,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-    .state('app', {
+  .state('app', {
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
@@ -33,13 +33,13 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   })
 
   .state('app.deals', {
-    url: '/deals',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/deals.html'
+      url: '/deals',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/deals.html'
+        }
       }
-    }
-  })
+    })
 
   .state('app.settings', {
       url: '/settings',
@@ -54,19 +54,29 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: '/tutorial',
       views: {
         'menuContent': {
-          templateUrl: 'templates/tutorial.html',
+          templateUrl: 'templates/tutorial.html'
         }
       }
     })
-    .state('app.testview', {
-      url: '/testviewURL',
+
+    .state('app.mainScreen', {
+      url: '/mainScreen',
       views: {
         'menuContent': {
-          templateUrl: 'templates/testview.html',
+          templateUrl: 'templates/mainScreen.html'
+        }
+      }
+    })
+
+    .state('app.restaurantDetailScreen', {
+      url: '/restaurantDetailScreen',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/restaurantDetailScreen.html'
         }
       }
     })
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/testviewURL');
+  $urlRouterProvider.otherwise('/app/mainScreen');
 });
