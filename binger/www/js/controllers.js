@@ -63,14 +63,14 @@ angular.module('starter.controllers', [])
   };
 
   // Button click goes to specificed path
-  $scope.go = function(path)
-  {
+  $scope.go = function(path) {
     $location.path(path)
   };
-$scope.openMaps = function() { 
-	launchnavigator.navigate([36.114647, -115.172813]), { 
-		start: "50.342847, -4.749904" 
-		};
+
+  $scope.openMaps = function() { 
+  	launchnavigator.navigate([36.114647, -115.172813]), { 
+  		start: "50.342847, -4.749904" 
+  	};
 	};
   // X button pulls new image
 
