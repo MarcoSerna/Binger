@@ -73,6 +73,18 @@ angular.module('starter.controllers', [])
   	};
 	};
   // X button pulls new image
+  $http({
+               method: '.GET',
+               url: "https://maps.googleapis.com/maps/api/place/radarsearch/json?location="+36.1055+","+115.1392+"&radius=5000&type=restaurant&key=AIzaSyDziyIlWeC-bUTiG2XOkDG9fkNT1bu2vHw" + ,
+               data: entryData,
+               headers: {
+                   'Content-Type': 'application/json'
+               }
+           }).success(function(data) {
+               console.log('success', data);
+           }).error(function(data) {
+               console.log('fail', data);
+           });
 
   // Check button pulls data for restaurant
 })
