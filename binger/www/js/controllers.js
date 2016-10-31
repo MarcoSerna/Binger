@@ -1,25 +1,5 @@
 angular.module('starter.controllers', [])
 
-.controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
-  var options = {timeout: 10000, enableHighAccuracy: true};
- 
-  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
- 
-    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
- 
-    var mapOptions = {
-      center: latLng,
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
- 
-    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
- 
-  }, function(error){
-    console.log("Could not get location");
-  });
-})
-
 .controller('AppCtrl', function($scope, $ionicModal, $location, $timeout) {
 
   // With the new view caching in Ionic, Controllers are only called
@@ -73,6 +53,7 @@ angular.module('starter.controllers', [])
   	};
 	};
   // X button pulls new image
+  /*****
   $http({
                method: '.GET',
                url: "https://maps.googleapis.com/maps/api/place/radarsearch/json?location="+36.1055+","+115.1392+"&radius=5000&type=restaurant&key=AIzaSyDziyIlWeC-bUTiG2XOkDG9fkNT1bu2vHw" + ,
@@ -85,6 +66,6 @@ angular.module('starter.controllers', [])
            }).error(function(data) {
                console.log('fail', data);
            });
-
+  *****/
   // Check button pulls data for restaurant
 })
