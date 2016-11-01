@@ -48,10 +48,12 @@ angular.module('starter.controllers', [])
   };
 
   $scope.openMaps = function() { 
-  	launchnavigator.navigate([36.114647, -115.172813]), { 
-  		start: "50.342847, -4.749904" 
+  	launchnavigator.navigate([36.114647, -115.172813]); /***, { 
+  		//start: "50.342847, -4.749904" 
   	};
+    ***/
 	};
+
   // X button pulls new image
   /*****
   $http({
