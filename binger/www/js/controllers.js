@@ -24,6 +24,7 @@ angular.module('starter.controllers', [])
     // Form data for the login modal
     $scope.results = {};
     $scope.current = 0;
+    $scope.length = 0;
     $scope.loginData = {
 
     };
@@ -67,14 +68,17 @@ angular.module('starter.controllers', [])
 
     //X button increments current to pull new image
     $scope.next = function() {
-      $scope.current++;
-      getNext();
-      console.log($scope.currentResult)
+      if($scope.length != 0){
+        $scope.current = (++$scope.current) % $scope.results.results.length;
+        getNext();
+        console.log($scope.currentResult)
+      }
 
     };
     //call Nearby Search and store in results variable
     PlacesFactory.getPlaces().success(function(data) {
       $scope.results = data;
+      $scope.length = $scope.results.results.length;
       getNext();
       console.log($scope.currentResult);
     });
