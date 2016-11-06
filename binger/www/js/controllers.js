@@ -12,6 +12,19 @@ angular.module('starter.controllers', [])
       }
     }
   })
+  .factory("ImageFactory", function($http,$scope){
+    return{
+      getPhoto: function(imageRef) {
+        $http({
+          method: 'GET',
+          url: "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + imageRef + "&key=AIzaSyDziyIlWeC-bUTiG2XOkDG9fkNT1bu2vHw",
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+      }
+    }
+  })
   .controller('AppCtrl', function($scope, $ionicModal, $location, $timeout, PlacesFactory) {
 
     // With the new view caching in Ionic, Controllers are only called
@@ -23,6 +36,7 @@ angular.module('starter.controllers', [])
 
     // Form data for the login modal
     $scope.results = {};
+    $scope.photo = null;
     $scope.current = 0;
     $scope.length = 0;
     $scope.loginData = {
@@ -75,23 +89,29 @@ angular.module('starter.controllers', [])
       }
 
     };
-    //call Nearby Search and store in results variable
+    //call Nearby Search API and store in results variable
     PlacesFactory.getPlaces().success(function(data) {
       $scope.results = data;
+      console.log($scope.results);
       $scope.length = $scope.results.results.length;
       getNext();
       console.log($scope.currentResult);
     });
+    //pulls only the necessary fields from results{}
     var getNext = function() {
       $scope.currentResult = {
         //restaurant, image, address, coordinates
         restaurantName: $scope.results.results[$scope.current].name,
-        // image: $scope.results.results[$scope.current].photos != null ? $scope.results.results[$scope.current].photo[0].reference : null,
+        imageRef: $scope.results.results[$scope.current].photos != null ? $scope.results.results[$scope.current].photos[0].photo_reference : null,
         address: $scope.results.results[$scope.current].vicinity,
         lat: $scope.results.results[$scope.current].geometry.location.lat,
         lng: $scope.results.results[$scope.current].geometry.location.lng
       }
-    }
+    };
+    //call Get Photos API and return an image variable
+    ImageFactory.getPhoto($scope.currentResult.imageRef).success(function(data){
+      $scope.photo = data;
+    });
 
 
 
