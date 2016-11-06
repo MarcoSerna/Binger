@@ -73,8 +73,8 @@ angular.module('starter.controllers', [])
         getNext();
         console.log($scope.currentResult)
       }
-
     };
+
     //call Nearby Search and store in results variable
     PlacesFactory.getPlaces().success(function(data) {
       $scope.results = data;
@@ -92,7 +92,4 @@ angular.module('starter.controllers', [])
         lng: $scope.results.results[$scope.current].geometry.location.lng
       }
     }
-
-
-
   })
