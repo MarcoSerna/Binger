@@ -87,9 +87,8 @@ angular.module('starter.controllers', [])
         getNext();
         console.log($scope.currentResult)
       }
-
     };
-    //call Nearby Search API and store in results variable
+    //call Nearby Search and store in results variable
     PlacesFactory.getPlaces().success(function(data) {
       $scope.results = data;
       console.log($scope.results);
