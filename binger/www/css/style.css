@@ -11,7 +11,7 @@
 }
 
 .restaurant-name {
-	height: 120px;
+	height: 100px;
 }
 
 .restaurant-info {
@@ -26,7 +26,7 @@
 .text-center {
 	position: absolute;
 	top: 50%;
-	left: 25%;
+	left: 20%;
 	font-family: Times;
 	font-size: 30px;
 }
