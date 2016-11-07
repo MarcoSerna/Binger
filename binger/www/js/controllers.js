@@ -6,15 +6,7 @@ angular.module('starter.controllers', [])
       }
     }
   })
-  .factory("ImageFactory", function($http){
-    return{
-      getPhoto: function(imageRef) {
-        $http.get("https://maps.googleapis.com/maps/api/place/photo?maxwidth=1020&photoreference=CoQBdwAAAGjNjbNbivnw_Tb8JH4KhD0Q65n189t0Lp-IxfTcqVNNDk9fR7CcPKAzizC_XVNpIrxZZAa4Umst8ATVLjMLK6CgUhb8SZAGH8DcT94Fok0rCYOiylwSw3qDBoS8wbzZxWA_9tSsEtVXO26voWDS6uXrmAI3wwHfrozkj_MSUHsuEhA1t7e1yoBxkTT3qjaH3SkyGhQlQI6QjYjctlCBi1lCSd_VNEutVA&key=AIzaSyDziyIlWeC-bUTiG2XOkDG9fkNT1bu2vHw").then(function(data){
-          console.log(data)}, null);
-      }
-    }
-  })
-  .controller('AppCtrl', function($scope, $ionicModal, $location, $timeout, PlacesFactory, ImageFactory) {
+  .controller('AppCtrl', function($scope, $ionicModal, $location, $timeout, PlacesFactory) {
 
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -96,10 +88,8 @@ angular.module('starter.controllers', [])
         lng: $scope.results.results[$scope.current].geometry.location.lng
       }
       //call Get Photos API and return an image variable
-      // ImageFactory.getPhoto($scope.currentResult.imageRef).success(function(data){
-        $scope.photo = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=1020&photoreference='+$scope.currentResult.imageRef+'&key=AIzaSyDziyIlWeC-bUTiG2XOkDG9fkNT1bu2vHw';
-        // console.log(data);
-      // });
+      $scope.photo = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=1020&photoreference='+$scope.currentResult.imageRef+'&key=AIzaSyDziyIlWeC-bUTiG2XOkDG9fkNT1bu2vHw';
+    
     };
 
 

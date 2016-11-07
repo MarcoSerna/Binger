@@ -4,9 +4,8 @@
   	<div class="restaurant-name">
     	<h2 align="center">{{currentResult.restaurantName}}</h2>
 	  </div>
-    <!---->
 
-    <img class="full-image" src="{{photo}}" on-swipe-left="next()" on-swipe-right="go('app/restaurantDetailScreen')">
+    <img class="full-image" height="250" width="35" src="{{photo}}" on-swipe-left="next()" on-swipe-right="go('app/restaurantDetailScreen')">
     
 		<div class="restaurant-info">
 			<p align="center">{{currentResult.address}}<p>
