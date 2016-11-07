@@ -17,3 +17,16 @@
 .restaurant-info {
 	height: 30px;
 }
+
+.photo-size {
+	height: 310px;
+	width: 412px;
+}
+
+.text-center {
+	position: absolute;
+	top: 50%;
+	left: 25%;
+	font-family: Times;
+	font-size: 30px;
+}
