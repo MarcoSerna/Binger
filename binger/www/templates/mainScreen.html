@@ -4,8 +4,8 @@
   	<div class="restaurant-name">
     	<h2 align="center">{{currentResult.restaurantName}}</h2>
 	  </div>
-    
-    <img class="full-image" src="https://firebasestorage.googleapis.com/v0/b/binger-repo.appspot.com/o/food2.jpg?alt=media&token=ffc75e83-5930-40d0-9251-088b2518ac0e" on-swipe-left="next()" on-swipe-right="go('app/restaurantDetailScreen')">
+    <!--"https://firebasestorage.googleapis.com/v0/b/binger-repo.appspot.com/o/food2.jpg?alt=media&token=ffc75e83-5930-40d0-9251-088b2518ac0e"-->
+    <img class="full-image" ng-src={{photo}} on-swipe-left="next()" on-swipe-right="go('app/restaurantDetailScreen')">
     
 		<div class="restaurant-info">
 			<p align="center">{{currentResult.address}}<p>

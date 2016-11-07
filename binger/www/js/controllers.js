@@ -2,30 +2,18 @@ angular.module('starter.controllers', [])
   .factory("PlacesFactory", function($http) {
     return {
       getPlaces: function() {
-        return $http({
-          method: 'GET',
-          url: "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=36.1055,-115.1392&radius=1609&type=restaurant&key=AIzaSyDziyIlWeC-bUTiG2XOkDG9fkNT1bu2vHw",
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
+        return $http.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=36.1055,-115.1392&radius=1609&type=restaurant&key=AIzaSyDziyIlWeC-bUTiG2XOkDG9fkNT1bu2vHw");
       }
     }
   })
-  .factory("ImageFactory", function($http,$scope){
+  .factory("ImageFactory", function($http){
     return{
       getPhoto: function(imageRef) {
-        $http({
-          method: 'GET',
-          url: "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + imageRef + "&key=AIzaSyDziyIlWeC-bUTiG2XOkDG9fkNT1bu2vHw",
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
+        return $http.get("https://maps.googleapis.com/maps/api/place/photo?maxwidth=1020&photoreference=CoQBdwAAAGjNjbNbivnw_Tb8JH4KhD0Q65n189t0Lp-IxfTcqVNNDk9fR7CcPKAzizC_XVNpIrxZZAa4Umst8ATVLjMLK6CgUhb8SZAGH8DcT94Fok0rCYOiylwSw3qDBoS8wbzZxWA_9tSsEtVXO26voWDS6uXrmAI3wwHfrozkj_MSUHsuEhA1t7e1yoBxkTT3qjaH3SkyGhQlQI6QjYjctlCBi1lCSd_VNEutVA&key=AIzaSyDziyIlWeC-bUTiG2XOkDG9fkNT1bu2vHw")
       }
     }
   })
-  .controller('AppCtrl', function($scope, $ionicModal, $location, $timeout, PlacesFactory) {
+  .controller('AppCtrl', function($scope, $ionicModal, $location, $timeout, PlacesFactory, ImageFactory) {
 
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -36,7 +24,7 @@ angular.module('starter.controllers', [])
 
     // Form data for the login modal
     $scope.results = {};
-    $scope.photo = null;
+    $scope.photo = "";
     $scope.current = 0;
     $scope.length = 0;
     $scope.loginData = {
@@ -106,12 +94,11 @@ angular.module('starter.controllers', [])
         lat: $scope.results.results[$scope.current].geometry.location.lat,
         lng: $scope.results.results[$scope.current].geometry.location.lng
       }
+      //call Get Photos API and return an image variable
+      ImageFactory.getPhoto($scope.currentResult.imageRef).success(function(data){
+        $scope.photo = data;
+      });
     };
-    //call Get Photos API and return an image variable
-    ImageFactory.getPhoto($scope.currentResult.imageRef).success(function(data){
-      $scope.photo = data;
-    });
-
 
 
   })
