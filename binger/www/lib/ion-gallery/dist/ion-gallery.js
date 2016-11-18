@@ -514,11 +514,14 @@ $templateCache.put("slider.html","<ion-modal-view class="imageView">
                     delegate-handle="slide-{{$index}}"
                     overflow-scroll="false"
                     >
+        <div class="image-title" ng-show="!hideAll"> 
+            <p align="center">{{single.sub}}<p>
+        </div>
         <div class="item item-image gallery-slide-view">
           <img ng-src="{{single.src}}">
         </div>
-        <div ng-if="single.sub && single.sub.length > 0" class="image-subtitle" ng-show="!hideAll">
-            <span ng-bind-html='single.sub'></span>
+        <div class="image-subtitle" ng-show="!hideAll">
+            <P align="center"s>{{single.address}}<p>
         </div>
         </ion-scroll>
       </ion-slide>

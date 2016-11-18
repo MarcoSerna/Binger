@@ -35,13 +35,24 @@
 	background-color:transparent
 }
 
+.imageView .image-title {
+	color: white;
+	position: absolute;
+	bottom: 0px;
+	left: 10px;
+	width: 95%;
+	height: 90%;
+	font-size: 25px;
+	z-index: 100
+}
+
 .imageView .image-subtitle {
 	color:white;
 	position:absolute;
 	bottom:0px;
 	left:10px;
 	width:95%;
-	height:15%;
+	height:25%;
 	z-index:100
 }
 
