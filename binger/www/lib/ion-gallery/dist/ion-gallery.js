@@ -427,6 +427,9 @@
         _onTap();
       }
 
+      $scope.openMaps = function(lat, lng) {
+        launchnavigator.navigate([lat, lng]);
+      };
     }
 
     function link(scope, element, attrs) {
@@ -521,7 +524,10 @@ $templateCache.put("slider.html","<ion-modal-view class="imageView">
           <img ng-src="{{single.src}}">
         </div>
         <div class="image-subtitle" ng-show="!hideAll">
-            <P align="center"s>{{single.address}}<p>
+            <P align="center">{{single.address}}<p>
+        </div>
+        <div>
+          <button class="button button-outline button-light dir-btn ion-map" ng-click="openMaps({{single.lat}}, {{single.lng}})"> Directions</button>
         </div>
         </ion-scroll>
       </ion-slide>
