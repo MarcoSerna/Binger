@@ -1,14 +1,27 @@
 angular.module('starter.controllers', [])
 
-.factory("PlacesFactory", function($http) {
-  return {
-    getPlaces: function() {
-      return $http.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=36.1055,-115.1392&radius=1609&type=restaurant&key=AIzaSyDziyIlWeC-bUTiG2XOkDG9fkNT1bu2vHw");
-    }
-  }
+.factory("YelpSearch", function() {
+  var Yelp = function(){
+    // require('./yelp');
+    // var yelpApi = new Yelp({
+    //   consumer_key: '0UXXnlrVDVdlVf0ep6Z71A',
+    //   consumer_secret: 'yiaqJptybCX3NovTtsGA-Hs-7S8',
+    //   token: 'k6Ietk_TA37nzW3m3d0pfHUlEBlocxTx',
+    //   token_secret: 'LukkVdKDpnKazlpROsZWO-JpP4g',
+    //   });
+
+    // return {
+    //   yelpApi.search({ term: 'food', location: 'Montreal' }, ).then(function (data) {
+    //     console.log(data); }).catch(function (err) {
+    //     console.error(err);
+    //     });
+
+    // }
+  };
 })
 
-.controller('AppCtrl', function($scope, $ionicModal, $location, $timeout, PlacesFactory) {
+
+.controller('AppCtrl', function($scope, $ionicModal, $location, $timeout, YelpSearch) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -73,10 +86,10 @@ angular.module('starter.controllers', [])
   };
 
   //call Nearby Search and store in results variable
-  PlacesFactory.getPlaces().success(function(data) {
+  PlacesFactory.YelpSearch().success(function(data) {
     $scope.results = data;
     console.log($scope.results);
-    $scope.length = $scope.results.results.length;
+    $scope.length = $scope.results.businesses.length;
     getNext();
     console.log($scope.currentResult);
   });
@@ -85,16 +98,15 @@ angular.module('starter.controllers', [])
   var getNext = function() {
     $scope.currentResult = {
       //restaurant, image, address, coordinates
-      restaurantName: $scope.results.results[$scope.current].name,
-      imageRef: $scope.results.results[$scope.current].photos != null ? $scope.results.results[$scope.current].photos[0].photo_reference : null,
-      address: $scope.results.results[$scope.current].vicinity,
-      lat: $scope.results.results[$scope.current].geometry.location.lat,
-      lng: $scope.results.results[$scope.current].geometry.location.lng
+      restaurantName: $scope.results.businesses[$scope.current].name,
+      image: $scope.results.businesses[$scope.current].image_url != null ? $scope.results.businesses[$scope.current].image_url : null,
+      address: $scope.results.businesses[$scope.current].location.display_address[0],
+      lat: $scope.results.businesses[$scope.current].location.coordinate.latitude,
+      lng: $scope.results.businesses[$scope.current].location.coodrdinate.longitude
     }
-    //call Get Photos API and return an image variable
-    $scope.photo = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=1020&photoreference='+$scope.currentResult.imageRef+'&key=AIzaSyDziyIlWeC-bUTiG2XOkDG9fkNT1bu2vHw';
+    
   };
-
+  photo = currentResult.image;
   //image array for gallery
   $scope.items = [];
   $scope.add2Q = function() {
