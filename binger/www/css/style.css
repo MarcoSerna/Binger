@@ -23,10 +23,12 @@
 	width: 412px;
 }
 
-.text-center {
-	position: absolute;
-	top: 50%;
-	left: 20%;
-	font-family: Times;
+.button-trashcan {
+	width: 60px;
+	height: 60px;
+	border-radius: 30px;
+	position: fixed;
+	bottom: 80px;
+	left: 40%;
 	font-size: 30px;
 }
