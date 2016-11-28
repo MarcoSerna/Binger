@@ -25,6 +25,16 @@
 	border-radius:5px
 }
 
+.imageView .dir-btn {
+	font-weight:900;
+	border:2px solid;
+	position:absolute;
+	border-radius:5px;
+	bottom: 70px;
+	left: 35%;
+	z-index: 100
+}
+
 .imageView .headerView {
 	background-image:none;
 	background-color:black

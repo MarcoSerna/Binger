@@ -32,33 +32,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery'])
     controller: 'AppCtrl'
   })
 
-  .state('app.deals', {
-      url: '/deals',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/deals.html'
-        }
-      }
-    })
-
-  .state('app.settings', {
-      url: '/settings',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/settings.html'
-        }
-      }
-    })
-
-  .state('app.tutorial', {
-      url: '/tutorial',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/tutorial.html'
-        }
-      }
-    })
-
     .state('app.mainScreen', {
       url: '/mainScreen',
       views: {

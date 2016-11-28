@@ -109,14 +109,24 @@ angular.module('starter.controllers', [])
   photo = currentResult.image;
   //image array for gallery
   $scope.items = [];
+  
   $scope.add2Q = function() {
-    $scope.items.push({
-      src: $scope.photo,
-      sub: $scope.currentResult.restaurantName,
-      address: $scope.results.results[$scope.current].vicinity,
-      lat: $scope.results.results[$scope.current].geometry.location.lat,
-      lng: $scope.results.results[$scope.current].geometry.location.lng
-    });
-  };
+    var isNew = 1;
 
+    for (i = 0; i < $scope.items.length; i++) {
+      if ($scope.items[i].src == $scope.photo) {
+        isNew = 0;
+      }
+    }
+
+    if (Boolean(isNew)) {
+      $scope.items.push({
+        src: $scope.photo,
+        sub: $scope.currentResult.restaurantName,
+        address: $scope.results.results[$scope.current].vicinity,
+        lat: $scope.results.results[$scope.current].geometry.location.lat,
+        lng: $scope.results.results[$scope.current].geometry.location.lng
+      });
+    }
+  };
 })
