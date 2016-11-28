@@ -7,7 +7,25 @@ angular.module('starter.controllers', [])
     }
   }
 })
-
+// .factory("YelpSearch", function() {
+//   var Yelp = function(){
+//     // require('./yelp');
+//     // var yelpApi = new Yelp({
+//     //   consumer_key: '0UXXnlrVDVdlVf0ep6Z71A',
+//     //   consumer_secret: 'yiaqJptybCX3NovTtsGA-Hs-7S8',
+//     //   token: 'k6Ietk_TA37nzW3m3d0pfHUlEBlocxTx',
+//     //   token_secret: 'LukkVdKDpnKazlpROsZWO-JpP4g',
+//     //   });
+// 
+//     // return {
+//     //   yelpApi.search({ term: 'food', location: 'Montreal' }, ).then(function (data) {
+//     //     console.log(data); }).catch(function (err) {
+//     //     console.error(err);
+//     //     });
+// 
+//     // }
+//   };
+//  })
 .controller('AppCtrl', function($scope, $ionicModal, $location, $timeout, PlacesFactory) {
 
   // With the new view caching in Ionic, Controllers are only called
@@ -90,6 +108,11 @@ angular.module('starter.controllers', [])
       address: $scope.results.results[$scope.current].vicinity,
       lat: $scope.results.results[$scope.current].geometry.location.lat,
       lng: $scope.results.results[$scope.current].geometry.location.lng
+//       restaurantName: $scope.results.businesses[$scope.current].name,
+//       image: $scope.results.businesses[$scope.current].image_url != null ? $scope.results.businesses[$scope.current].image_url : null,
+//       address: $scope.results.businesses[$scope.current].location.display_address[0],
+//       lat: $scope.results.businesses[$scope.current].location.coordinate.latitude,
+//       lng: $scope.results.businesses[$scope.current].location.coodrdinate.longitude
     }
     //call Get Photos API and return an image variable
     $scope.photo = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=1020&photoreference='+$scope.currentResult.imageRef+'&key=AIzaSyDziyIlWeC-bUTiG2XOkDG9fkNT1bu2vHw';
