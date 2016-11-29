@@ -161,5 +161,7 @@ angular.module('starter.controllers', [])
         // lng: $scope.results.businesses[$scope.current].location.coodrdinate.longitude
       });
     }
+	$scope.next();
+	$scope.go('app/mainScreen');
   };
 })
