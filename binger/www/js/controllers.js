@@ -7,26 +7,34 @@ angular.module('starter.controllers', [])
     }
   }
 })
-// .factory("YelpSearch", function() {
-//   var Yelp = function(){
-//     // require('./yelp');
-//     // var yelpApi = new Yelp({
-//     //   consumer_key: '0UXXnlrVDVdlVf0ep6Z71A',
-//     //   consumer_secret: 'yiaqJptybCX3NovTtsGA-Hs-7S8',
-//     //   token: 'k6Ietk_TA37nzW3m3d0pfHUlEBlocxTx',
-//     //   token_secret: 'LukkVdKDpnKazlpROsZWO-JpP4g',
-//     //   });
-// 
-//     // return {
-//     //   yelpApi.search({ term: 'food', location: 'Montreal' }, ).then(function (data) {
-//     //     console.log(data); }).catch(function (err) {
-//     //     console.error(err);
-//     //     });
-// 
-//     // }
-//   };
+// .factory("YelpSearch", function(yelp) {
+//   var client = yelp.createClient({
+//     oauth: {
+//       "consumer_key": "0UXXnlrVDVdlVf0ep6Z71A",
+//       "consumer_secret": "yiaqJptybCX3NovTtsGA-Hs-7S8",
+//       "token": "k6Ietk_TA37nzW3m3d0pfHUlEBlocxTx",
+//       "token_secret": "LukkVdKDpnKazlpROsZWO-JpP4g"
+//     }
+//   });
+//   return {
+//     getResults: function(client){
+//       return{
+//         client.search({ 
+//           term: 'food', 
+//           location: 'Las Vegas' 
+//         }).then(function (data) {
+//           return data;
+//             //console.log(data);
+//            }).catch(function (err) {
+//             console.error(err);
+//           });
+//       }
+//     }
+//   }
+    
 //  })
-.controller('AppCtrl', function($scope, $ionicModal, $location, $timeout, PlacesFactory) {
+
+.controller('AppCtrl', function($scope, $ionicModal, $location, $timeout, PlacesFactory /*YelpSearch*/) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -43,6 +51,9 @@ angular.module('starter.controllers', [])
   $scope.loginData = {
 
   };
+  /* Read up on how to configure a require to get this piece working:
+  var yelp = require("../../node_modules/node-yelp/index.js");
+  */
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -85,6 +96,7 @@ angular.module('starter.controllers', [])
   $scope.next = function() {
     if($scope.length != 0){
       $scope.current = (++$scope.current) % $scope.results.results.length;
+      //$scope.current = (++$scope.current) % $scope.results.businesses.length;
       getNext();
       console.log($scope.currentResult)
     }
@@ -98,24 +110,31 @@ angular.module('starter.controllers', [])
     getNext();
     console.log($scope.currentResult);
   });
+  // YelpSearch().getResults(yelp).success(function(data) {
+  //   $scope.results = data;
+  //   console.log($scope.results);
+  //   $scope.length = $scope.results.businesses.length;
+  //   getNext();
+  //   console.log($scope.currentResult);
+  // });
 
   //pulls only the necessary fields from results{}
   var getNext = function() {
     $scope.currentResult = {
       //restaurant, image, address, coordinates
       restaurantName: $scope.results.results[$scope.current].name,
-      imageRef: $scope.results.results[$scope.current].photos != null ? $scope.results.results[$scope.current].photos[0].photo_reference : null,
+      image: $scope.results.results[$scope.current].photos != null ? $scope.results.results[$scope.current].photos[0].photo_reference : null,
       address: $scope.results.results[$scope.current].vicinity,
       lat: $scope.results.results[$scope.current].geometry.location.lat,
       lng: $scope.results.results[$scope.current].geometry.location.lng
-//       restaurantName: $scope.results.businesses[$scope.current].name,
-//       image: $scope.results.businesses[$scope.current].image_url != null ? $scope.results.businesses[$scope.current].image_url : null,
-//       address: $scope.results.businesses[$scope.current].location.display_address[0],
-//       lat: $scope.results.businesses[$scope.current].location.coordinate.latitude,
-//       lng: $scope.results.businesses[$scope.current].location.coodrdinate.longitude
+      // restaurantName: $scope.results.businesses[$scope.current].name,
+      // image: $scope.results.businesses[$scope.current].image_url != null ? $scope.results.businesses[$scope.current].image_url : null,
+      // address: $scope.results.businesses[$scope.current].location.display_address[0],
+      // lat: $scope.results.businesses[$scope.current].location.coordinate.latitude,
+      // lng: $scope.results.businesses[$scope.current].location.coodrdinate.longitude
     }
     //call Get Photos API and return an image variable
-    $scope.photo = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=1020&photoreference='+$scope.currentResult.imageRef+'&key=AIzaSyDziyIlWeC-bUTiG2XOkDG9fkNT1bu2vHw';
+    $scope.photo = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=1020&photoreference='+$scope.currentResult.image+'&key=AIzaSyDziyIlWeC-bUTiG2XOkDG9fkNT1bu2vHw';
   };
 
   //image array for gallery
@@ -137,6 +156,9 @@ angular.module('starter.controllers', [])
         address: $scope.results.results[$scope.current].vicinity,
         lat: $scope.results.results[$scope.current].geometry.location.lat,
         lng: $scope.results.results[$scope.current].geometry.location.lng
+        // address: $scope.results.businesses[$scope.current].location.display_address[0],
+        // lat: $scope.results.businesses[$scope.current].location.coordinate.latitude,
+        // lng: $scope.results.businesses[$scope.current].location.coodrdinate.longitude
       });
     }
   };
