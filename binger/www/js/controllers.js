@@ -7,34 +7,34 @@ angular.module('starter.controllers', [])
     }
   }
 })
-// .factory("YelpSearch", function(yelp) {
-//   var client = yelp.createClient({
-//     oauth: {
-//       "consumer_key": "0UXXnlrVDVdlVf0ep6Z71A",
-//       "consumer_secret": "yiaqJptybCX3NovTtsGA-Hs-7S8",
-//       "token": "k6Ietk_TA37nzW3m3d0pfHUlEBlocxTx",
-//       "token_secret": "LukkVdKDpnKazlpROsZWO-JpP4g"
-//     }
-//   });
-//   return {
-//     getResults: function(client){
-//       return{
-//         client.search({ 
-//           term: 'food', 
-//           location: 'Las Vegas' 
-//         }).then(function (data) {
-//           return data;
-//             //console.log(data);
-//            }).catch(function (err) {
-//             console.error(err);
-//           });
-//       }
-//     }
-//   }
-    
-//  })
 
-.controller('AppCtrl', function($scope, $ionicModal, $location, $timeout, PlacesFactory /*YelpSearch*/) {
+
+//  .factory("YelpSearch", function() {  
+//    return {
+//       "getResults": function(name, callback) {
+//           var method = 'GET';
+//           var url = 'http://api.yelp.com/v2/search';
+//           var params = {
+//                   callback: 'angular.callbacks._0',
+//                   location: 'Las+Vegas',
+//                   oauth_consumer_key: '0UXXnlrVDVdlVf0ep6Z71A', 
+//                   oauth_token: 'k6Ietk_TA37nzW3m3d0pfHUlEBlocxTx', 
+//                   oauth_signature_method: "HMAC-SHA1",
+//                   oauth_timestamp: new Date().getTime(),
+//                   oauth_nonce: randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+//                   term: 'food'
+//               };
+//           var consumerSecret = 'yiaqJptybCX3NovTtsGA-Hs-7S8'; 
+//           var tokenSecret = 'LukkVdKDpnKazlpROsZWO-JpP4g'; 
+//           var signature = oauthSignature.generate(method, url, params, consumerSecret, tokenSecret/*, {encodeSignature: false}*/);
+//           params['oauth_signature'] = signature;
+//           $http.get(url, {params: params}).success(callback);
+//       }
+//   }
+// })
+
+
+.controller('AppCtrl', function($scope, $ionicModal, $location, $timeout, PlacesFactory) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -51,9 +51,6 @@ angular.module('starter.controllers', [])
   $scope.loginData = {
 
   };
-  /* Read up on how to configure a require to get this piece working:
-  var yelp = require("../../node_modules/node-yelp/index.js");
-  */
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -92,6 +89,23 @@ angular.module('starter.controllers', [])
     launchnavigator.navigate([$scope.currentResult.lat, $scope.currentResult.lng]);
   };
 
+  /*call Nearby Search and store in results variable*/
+  PlacesFactory.getPlaces().success(function(data) {
+    $scope.results = data;
+    console.log($scope.results);
+    $scope.length = $scope.results.results.length;
+    getNext();
+    console.log($scope.currentResult);
+  });
+
+     // YelpSearch.getResults('', function(data) {
+     //   $scope.results = data;
+     //   console.log($scope.results);
+     //   $scope.length = $scope.results.businesses.length;
+     //   getNext();
+     //   console.log($scope.currentResult);
+     // });
+
   //X button increments current to pull new image
   $scope.next = function() {
     if($scope.length != 0){
@@ -102,26 +116,11 @@ angular.module('starter.controllers', [])
     }
   };
 
-  //call Nearby Search and store in results variable
-  PlacesFactory.getPlaces().success(function(data) {
-    $scope.results = data;
-    console.log($scope.results);
-    $scope.length = $scope.results.results.length;
-    getNext();
-    console.log($scope.currentResult);
-  });
-  // YelpSearch().getResults(yelp).success(function(data) {
-  //   $scope.results = data;
-  //   console.log($scope.results);
-  //   $scope.length = $scope.results.businesses.length;
-  //   getNext();
-  //   console.log($scope.currentResult);
-  // });
 
   //pulls only the necessary fields from results{}
   var getNext = function() {
     $scope.currentResult = {
-      //restaurant, image, address, coordinates
+      /*restaurant, image, address, coordinates*/
       restaurantName: $scope.results.results[$scope.current].name,
       image: $scope.results.results[$scope.current].photos != null ? $scope.results.results[$scope.current].photos[0].photo_reference : null,
       address: $scope.results.results[$scope.current].vicinity,
@@ -156,6 +155,7 @@ angular.module('starter.controllers', [])
         address: $scope.results.results[$scope.current].vicinity,
         lat: $scope.results.results[$scope.current].geometry.location.lat,
         lng: $scope.results.results[$scope.current].geometry.location.lng
+
         // address: $scope.results.businesses[$scope.current].location.display_address[0],
         // lat: $scope.results.businesses[$scope.current].location.coordinate.latitude,
         // lng: $scope.results.businesses[$scope.current].location.coodrdinate.longitude
