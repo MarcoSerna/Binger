@@ -9,25 +9,17 @@ angular.module('starter.controllers', [])
 })
 
 
-//  .factory("YelpSearch", function() {  
+//  .factory("YelpSearch", function($http) {  
 //    return {
-//       "getResults": function(name, callback) {
-//           var method = 'GET';
-//           var url = 'http://api.yelp.com/v2/search';
-//           var params = {
-//                   callback: 'angular.callbacks._0',
-//                   location: 'Las+Vegas',
-//                   oauth_consumer_key: '0UXXnlrVDVdlVf0ep6Z71A', 
-//                   oauth_token: 'k6Ietk_TA37nzW3m3d0pfHUlEBlocxTx', 
-//                   oauth_signature_method: "HMAC-SHA1",
-//                   oauth_timestamp: new Date().getTime(),
-//                   oauth_nonce: randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
-//                   term: 'food'
-//               };
-//           var consumerSecret = 'yiaqJptybCX3NovTtsGA-Hs-7S8'; 
-//           var tokenSecret = 'LukkVdKDpnKazlpROsZWO-JpP4g'; 
-//           var signature = oauthSignature.generate(method, url, params, consumerSecret, tokenSecret/*, {encodeSignature: false}*/);
-//           params['oauth_signature'] = signature;
+//       "getResults": function(name, nonce, url, params, callback) {
+//         var key, value;
+//         url += '/?';
+//          for (key in params) {
+//           url += '&' + key + '=' + params[key];
+//           console.log(params[key]);
+//         }
+
+//           console.log(url);
 //           $http.get(url, {params: params}).success(callback);
 //       }
 //   }
@@ -49,8 +41,8 @@ angular.module('starter.controllers', [])
   $scope.current = 0;
   $scope.length = 0;
   $scope.loginData = {
-
   };
+  $scope.Math = window.Math;
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -97,20 +89,40 @@ angular.module('starter.controllers', [])
     getNext();
     console.log($scope.currentResult);
   });
-
-     // YelpSearch.getResults('', function(data) {
-     //   $scope.results = data;
-     //   console.log($scope.results);
-     //   $scope.length = $scope.results.businesses.length;
-     //   getNext();
-     //   console.log($scope.currentResult);
-     // });
+  // var randomString = function(length, chars) {
+  //     var result = '';
+  //     for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
+  //     return result;
+  // }
+  // var nonce = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+  // var method = 'GET';
+  //         var url = 'http://api.yelp.com/v2/search';
+  //         var params = {
+  //                 location: 'Las+Vegas',
+  //                 oauth_consumer_key: '0UXXnlrVDVdlVf0ep6Z71A', 
+  //                 oauth_token: 'k6Ietk_TA37nzW3m3d0pfHUlEBlocxTx', 
+  //                 oauth_signature_method: "HMAC-SHA1",
+  //                 oauth_timestamp: new Date().getTime(),//do i wan an object or string for this??
+  //                 oauth_nonce: nonce,
+  //                 term: 'food'
+  //             };
+  //         var consumerSecret = 'yiaqJptybCX3NovTtsGA-Hs-7S8'; 
+  //         var tokenSecret = 'LukkVdKDpnKazlpROsZWO-JpP4g'; 
+  //         var signature = oauthSignature.generate(method, url, params, consumerSecret, tokenSecret/*, {encodeSignature: false}*/);
+  //         params['oauth_signature'] = signature;
+  //    YelpSearch.getResults('', nonce, url, params, function(data) {
+  //      $scope.results = data;
+  //      console.log($scope.results);
+  //      $scope.length = $scope.results.businesses.length;
+  //      getNext();
+  //      console.log($scope.currentResult);
+  //    });
 
   //X button increments current to pull new image
   $scope.next = function() {
     if($scope.length != 0){
-      $scope.current = (++$scope.current) % $scope.results.results.length;
-      //$scope.current = (++$scope.current) % $scope.results.businesses.length;
+      //$scope.current = (++$scope.current) % $scope.results.results.length;
+      $scope.current = (++$scope.current) % $scope.results.businesses.length;
       getNext();
       console.log($scope.currentResult)
     }
@@ -133,7 +145,9 @@ angular.module('starter.controllers', [])
       // lng: $scope.results.businesses[$scope.current].location.coodrdinate.longitude
     }
     //call Get Photos API and return an image variable
+    // $scope.photo = $scope.currentResult.image;
     $scope.photo = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=1020&photoreference='+$scope.currentResult.image+'&key=AIzaSyDziyIlWeC-bUTiG2XOkDG9fkNT1bu2vHw';
+
   };
 
   //image array for gallery
@@ -161,7 +175,7 @@ angular.module('starter.controllers', [])
         // lng: $scope.results.businesses[$scope.current].location.coodrdinate.longitude
       });
     }
-	$scope.next();
-	$scope.go('app/mainScreen');
+  $scope.next();
+  $scope.go('app/mainScreen');
   };
 })
