@@ -208,7 +208,6 @@ e;d++)if(d%4){var g=f.indexOf(b.charAt(d-1))<<2*(d%4),h=f.indexOf(b.charAt(d))>>
 		},
 		_loadParametersFromObject : function (parameters) {
 			var key;
-				console.log(parameters);
 			for (key in parameters) {
 				if (parameters.hasOwnProperty(key)) {
 					this._loadParameterValue(key, parameters[key] || '');
