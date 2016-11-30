@@ -121,8 +121,8 @@ angular.module('starter.controllers', [])
   //X button increments current to pull new image
   $scope.next = function() {
     if($scope.length != 0){
-      //$scope.current = (++$scope.current) % $scope.results.results.length;
-      $scope.current = (++$scope.current) % $scope.results.businesses.length;
+      $scope.current = (++$scope.current) % $scope.results.results.length;
+      //$scope.current = (++$scope.current) % $scope.results.businesses.length;
       getNext();
       console.log($scope.currentResult)
     }
@@ -142,7 +142,7 @@ angular.module('starter.controllers', [])
       // image: $scope.results.businesses[$scope.current].image_url != null ? $scope.results.businesses[$scope.current].image_url : null,
       // address: $scope.results.businesses[$scope.current].location.display_address[0],
       // lat: $scope.results.businesses[$scope.current].location.coordinate.latitude,
-      // lng: $scope.results.businesses[$scope.current].location.coodrdinate.longitude
+      // lng: $scope.results.businesses[$scope.current].location.coordinate.longitude
     }
     //call Get Photos API and return an image variable
     // $scope.photo = $scope.currentResult.image;

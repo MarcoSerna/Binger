@@ -5,11 +5,11 @@
   position: fixed;
   bottom: 80px;
 }
-.screen-color{
+.screen-color {
 	background-color:#eeeeee;
 }
 
-.button-pill{
+.button-pill {
 	width: 135px;
 	height:40px;
 	border-radius: 30px;
