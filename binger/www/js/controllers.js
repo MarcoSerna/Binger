@@ -105,7 +105,9 @@ angular.module('starter.controllers', [])
   var params = {
           callback: 'angular.callbacks._0',
           term: 'food',
-          location: 'Las+Vegas',
+          limit: '40',
+          location: '4505+S+Maryland+Pkwy',
+          cll: '36.1055,-115.1392',
           radius_filter: '1609',
           oauth_consumer_key: '0UXXnlrVDVdlVf0ep6Z71A', 
           oauth_token: 'k6Ietk_TA37nzW3m3d0pfHUlEBlocxTx', 
