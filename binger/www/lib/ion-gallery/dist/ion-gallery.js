@@ -500,7 +500,7 @@ angular.module("templates", []).run(["$templateCache", function($templateCache) 
   </div>
 ");
 $templateCache.put("slider.html","<ion-modal-view class="imageView">
-  <ion-header-bar class="headerView" ng-show="!hideAll">
+  <ion-header-bar class="headerView">
     <button class="button button-outline button-light close-btn" ng-click="closeModal()">{{::actionLabel}}</button>
   </ion-header-bar>
 
@@ -517,14 +517,17 @@ $templateCache.put("slider.html","<ion-modal-view class="imageView">
                     delegate-handle="slide-{{$index}}"
                     overflow-scroll="false"
                     >
-        <div class="image-title" ng-show="!hideAll"> 
+        <div class="image-title"> 
             <p align="center">{{single.sub}}<p>
         </div>
         <div class="item item-image gallery-slide-view">
           <img ng-src="{{single.src}}">
         </div>
-        <div class="image-subtitle" ng-show="!hideAll">
+        <div class="image-subtitle">
             <P align="center">{{single.address}}<p>
+        </div>
+        <div>
+          <button class="button button-outline button-light del-btn ion-ios-trash-outline" ng-click=" ;closeModal()"> Delete</button>
         </div>
         <div>
           <button class="button button-outline button-light dir-btn ion-map" ng-click="openMaps({{single.lat}}, {{single.lng}})"> Directions</button>

@@ -18,13 +18,16 @@
   <ion-side-menu side="right">
     <ion-header-bar class="bar-dark">
       <h1 class="title">List</h1>
+
+      <button class="button button-assertive button-trashcan ion-ios-trash-outline" ng-click="items.splice($index)">
+         Delete All
+      </button>
     </ion-header-bar>
     <ion-content>
       
       <ion-gallery ion-gallery-items="items" ion-gallery-row="2"></ion-gallery>
 
-      <button class="button button-assertive button-trashcan ion-ios-trash-outline" ng-click="items.splice($index, 1)">
-      </button>
+      
 
     </ion-content>
   </ion-side-menu>
