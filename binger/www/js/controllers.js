@@ -155,6 +155,9 @@ angular.module('starter.controllers', [])
       lat: $scope.results.businesses[$scope.current].location.coordinate.latitude,
       lng: $scope.results.businesses[$scope.current].location.coordinate.longitude
     }
+    //fix for small image being loaded
+    $scope.currentResult.image = $scope.currentResult.image.replace('ms.jpg', 'o.jpg');
+
     //call Get Photos API and return an image variable
     $scope.photo = $scope.currentResult.image;
 
