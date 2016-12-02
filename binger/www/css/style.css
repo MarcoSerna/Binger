@@ -21,11 +21,11 @@
 }
 
 .restaurant-name {
-	height: 100px;
+	height: 80px;
 }
 
 .restaurant-info {
-	height: 30px;
+	height: 40px;
 }
 
 .photo-size {
@@ -39,4 +39,11 @@
 	bottom: 10%;
 	right: 20%;
 	font-size: 20px;
+}
+
+.yelp-pic {
+	height: 40px;
+	width: 80px;
+	position: fixed;
+	right: 1%;
 }

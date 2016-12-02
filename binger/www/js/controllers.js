@@ -164,7 +164,6 @@ angular.module('starter.controllers', [])
     $scope.currentResult.image = $scope.currentResult.image.replace('ms.jpg', 'o.jpg');
 
     //call Get Photos API and return an image variable
-    // $scope.photo = $scope.currentResult.image;
     $scope.photo = $scope.currentResult.image;
 
   };
