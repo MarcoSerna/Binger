@@ -13,21 +13,20 @@
 
 	  <div class="button-centered">
 		  <p>
-		  <button class="button button-dark button-pill ion-map" ng-click="openMaps()">
-		    Directions
-			</button>
-			 &nbsp;&nbsp;
-		  <button class="button button-dark button-pill ion-clipboard" ng-click="add2Q()">
-		    Add to Queue
-			</button>
-			<br/>
-			<br/>
+			  <button class="button button-dark button-pill ion-map" ng-click="openMaps()">
+			    Directions
+				</button>
+				 &nbsp;&nbsp;
+			  <button class="button button-dark button-pill ion-clipboard" ng-click="add2Q()">
+			    Add to Queue
+				</button>
+				<br/>
+				<br/>
 			</p>
-		  <button class="button button-dark button-pill ion-android-restaurant" ng-disabled="$scope.currentResult.eat24 != null" ng-click="openEat24()">
+			
+		  <button class="button button-dark button-pill ion-android-restaurant" ng-disabled="currentResult.eat24 == null" ng-click="openEat24()">
 		    Eat24
 			</button>
-			<br/>
-			<br/>
 		</div>
 
   </ion-content>

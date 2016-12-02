@@ -86,7 +86,9 @@ angular.module('starter.controllers', [])
   };
 
   $scope.openEat24 = function() {
-    window.open($scope.currentResult.eat24, '_system', 'location=no');
+    if ($scope.currentResult.eat24 != null) {
+      window.open($scope.currentResult.eat24, '_blank', 'location=no');
+    }
   };
 
   // /*call Nearby Search and store in results variable*/
@@ -112,6 +114,7 @@ angular.module('starter.controllers', [])
           limit: '40',
           location: '36.1055,-115.1392',
           radius_filter: '1609',
+          actionlinks: 'True',
           oauth_consumer_key: '0UXXnlrVDVdlVf0ep6Z71A', 
           oauth_token: 'k6Ietk_TA37nzW3m3d0pfHUlEBlocxTx', 
           oauth_signature_method: "HMAC-SHA1",
