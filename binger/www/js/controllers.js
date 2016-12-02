@@ -85,6 +85,10 @@ angular.module('starter.controllers', [])
     launchnavigator.navigate([$scope.currentResult.lat, $scope.currentResult.lng]);
   };
 
+  $scope.openEat24 = function() {
+    window.open($scope.currentResult.eat24, '_system', 'location=no');
+  };
+
   // /*call Nearby Search and store in results variable*/
   // PlacesFactory.getPlaces().success(function(data) {
   //   $scope.results = data;
@@ -153,7 +157,8 @@ angular.module('starter.controllers', [])
       image: $scope.results.businesses[$scope.current].image_url != null ? $scope.results.businesses[$scope.current].image_url : null,
       address: $scope.results.businesses[$scope.current].location.display_address[0],
       lat: $scope.results.businesses[$scope.current].location.coordinate.latitude,
-      lng: $scope.results.businesses[$scope.current].location.coordinate.longitude
+      lng: $scope.results.businesses[$scope.current].location.coordinate.longitude,
+      eat24: $scope.results.businesses[$scope.current].eat24_url
     }
     //fix for small image being loaded
     $scope.currentResult.image = $scope.currentResult.image.replace('ms.jpg', 'o.jpg');
