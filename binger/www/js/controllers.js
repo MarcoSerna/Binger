@@ -156,7 +156,6 @@ angular.module('starter.controllers', [])
       lng: $scope.results.businesses[$scope.current].location.coordinate.longitude
     }
     //call Get Photos API and return an image variable
-    // $scope.photo = $scope.currentResult.image;
     $scope.photo = $scope.currentResult.image;
 
   };
