@@ -6,7 +6,8 @@
       </ion-nav-back-button>
 
       <ion-nav-buttons side="left">
-        <button class="button button-dark ion-ios-information-outline" style="font-size:25px" ng-click="openTutorial()" menu-toggle="">
+        <button class="button button-dark ion-ios-information-outline" style="font-size:16px" ng-click="openTutorial()" menu-toggle="">
+          Help
         </button>
       </ion-nav-buttons>
 
@@ -24,12 +25,20 @@
     <ion-header-bar class="bar-dark">
       <h1 class="title">List</h1>
 
-      <button class="button button-assertive button-trashcan ion-ios-trash-outline" ng-click="items.splice($index)">
-         Delete All
+      <button class="button button-assertive button-trashcan ion-ios-trash-outline" ng-click="showDelete = !showDelete">
+         Delete
       </button>
     </ion-header-bar>
     <ion-content>  
-      <ion-gallery ion-gallery-items="items" ion-gallery-row="2"></ion-gallery>
+      <ion-list show-delete="showDelete">
+        <ion-item ng-repeat="pics in items" class="item-thumbnail-left" ng-click="go('app/restaurantDetailScreen')">
+          <img ng-src="{{pics.src}}">
+          <h2>{{pics.sub}}</h2>
+
+          <ion-delete-button class="ion-ios-trash-outline" ng-click="items.splice($index, 1)">
+          </ion-delete-button>
+        </ion-item>
+      </ion-list>
     </ion-content>
   </ion-side-menu>
 
