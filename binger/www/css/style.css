@@ -48,26 +48,26 @@
 }
 
 .tutorial-screen {
-	opacity: 0.8;
+	opacity: .9;
 	background-color: gray;
 }
 
 .left {
 	float: left;
 	position: relative;
-  width: 206px;
+  width: 174px;
 }
 
 .right {
 	position: relative;
 	text-align: left;
-	margin-left: 206px;
+	margin-left: 186px;
 }
 
 .font-style {
-	font-size: 20px;
-	font-family: "Comic Sans MS", cursive, sans-serif;
-	color: #DCDCDC;
+	font-size: 16px;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: white;
 }
 
 .arrow-size {

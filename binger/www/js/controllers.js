@@ -44,11 +44,9 @@ angular.module('starter.controllers', [])
   $scope.photo = "";
   $scope.current = 0;
   $scope.length = 0;
-  $scope.loginData = {
-  };
   $scope.Math = window.Math;
 
-  /////////////////////////////////////////////////////
+  //* Tutorial Overlay
   $ionicModal.fromTemplateUrl('templates/tutorial.html', {
     scope: $scope
   }).then(function(modal) {
@@ -62,8 +60,6 @@ angular.module('starter.controllers', [])
   $scope.closeTutorial = function() {
     $scope.modal.hide();
   };
-
-  /////////////////////////////////////////////////////
 
   // Button click goes to specificed path
   $scope.go = function(path) {
