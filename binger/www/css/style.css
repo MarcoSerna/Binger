@@ -2,9 +2,8 @@
   width: 60px;
   height: 60px;
   border-radius: 30px;
-  position: fixed;
-  bottom: 80px;
 }
+
 .screen-color {
 	background-color:#eeeeee;
 }
@@ -46,4 +45,32 @@
 	width: 80px;
 	position: fixed;
 	right: 1%;
+}
+
+.tutorial-screen {
+	opacity: 0.8;
+	background-color: gray;
+}
+
+.left {
+	float: left;
+	position: relative;
+  width: 206px;
+}
+
+.right {
+	position: relative;
+	text-align: left;
+	margin-left: 206px;
+}
+
+.font-style {
+	font-size: 20px;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	color: #DCDCDC;
+}
+
+.arrow-size {
+	font-size: 50px;
+	text-align: center;
 }
