@@ -4,7 +4,7 @@
   	<div class="restaurant-name">
 	  </div>
 	  
-    <img class="photo-size" src="{{photo}}" on-swipe-left="next()" on-swipe-right="go('app/restaurantDetailScreen')">
+    <img class="photo-size" src="{{currentResult.image}}" on-swipe-left="next()" on-swipe-right="visit('app/restaurantDetailScreen')">
 
   	</br></br></br></br>
   
@@ -13,7 +13,7 @@
 		  	<button class="button button-assertive button-circle ion-close" ng-click="next()">
 		  	</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		   	<button class="button button-balanced button-circle ion-checkmark" ng-click="go('app/restaurantDetailScreen')">
+		   	<button class="button button-balanced button-circle ion-checkmark" ng-click="visit('app/restaurantDetailScreen')">
 				</button>
 			</p>
 		</div>

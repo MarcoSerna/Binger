@@ -31,11 +31,11 @@
     </ion-header-bar>
     <ion-content>  
       <ion-list show-delete="showDelete">
-        <ion-item ng-repeat="pics in items" class="item-thumbnail-left" ng-click="go('app/restaurantDetailScreen')">
-          <img ng-src="{{pics.src}}">
-          <h2>{{pics.sub}}</h2>
+        <ion-item ng-repeat="pics in items " class="item-thumbnail-left" ng-click="reVisit('app/restaurantDetailScreen',{{pics}})">
+          <img ng-src="{{pics.image}}">
+          <h2>{{pics.restaurantName}}</h2>
 
-          <ion-delete-button class="ion-ios-trash-outline" ng-click="items.splice($index, 1)">
+          <ion-delete-button class="ion-ios-trash-outline" ng-click="onItemDelete($index)">
           </ion-delete-button>
         </ion-item>
       </ion-list>

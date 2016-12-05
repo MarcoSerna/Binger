@@ -2,13 +2,13 @@
   <ion-content class="screen-color">
   
    	<div class="restaurant-name">
-    	<h2 align="center">{{currentResult.restaurantName}}</h2>
+    	<h2 align="center">{{photo.restaurantName}}</h2>
 	  </div>
     
-  	<img class="photo-size" src="{{photo}}">
+  	<img class="photo-size" src="{{photo.image}}">
 
     <div>
-			<p class="restaurant-info" align="center">{{currentResult.address}} <img class="yelp-pic" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/developer_pages/95212dafe621/assets/img/yelp-2c.png"></p>
+			<p class="restaurant-info" align="center">{{photo.address}} <img class="yelp-pic" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/developer_pages/95212dafe621/assets/img/yelp-2c.png"></p>
 		</div>
 
 	  <div class="button-centered">
@@ -17,14 +17,14 @@
 			    Directions
 				</button>
 				 &nbsp;&nbsp;
-			  <button class="button button-dark button-pill ion-clipboard" ng-click="add2Q()">
+			  <button class="button button-dark button-pill ion-clipboard" ng-disabled="prevAdded()" ng-click="add2Q()">
 			    Add to Queue
 				</button>
 				<br/>
 				<br/>
 			</p>
 			
-		  <button class="button button-dark button-pill ion-android-restaurant" ng-disabled="currentResult.eat24 == null" ng-click="openEat24()">
+		  <button class="button button-dark button-pill ion-android-restaurant" ng-disabled="isNull()" ng-click="openEat24()">
 		    Eat24
 			</button>
 		</div>

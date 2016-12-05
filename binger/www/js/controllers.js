@@ -1,29 +1,9 @@
 angular.module('starter.controllers', [])
 
-// .factory("PlacesFactory", function($http) {
-//   return {
-//     getPlaces: function() {
-//       return $http.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=36.1055,-115.1392&radius=1609&type=restaurant&key=AIzaSyDziyIlWeC-bUTiG2XOkDG9fkNT1bu2vHw");
-//     }
-//   }
-// })
-
 
  .factory("YelpSearch", function($http) {  
    return {
       "getResults": function(name, url, params, callback) {
-        // var key;
-        // var keys = Object.keys(params); 
-
-        // url += '/?';
-        //  for (key in params) {
-        //   console.log(key + ':  ' + params[key]);
-        //   url += key + '=' + params[key];
-        //   if(key !== keys.slice(-1)[0])
-        //     url += '&';
-        // }
-        //   console.log(params);
-        //   console.log(url);
           $http.jsonp(url, {params: params}).success(callback);
       }
   }
@@ -41,7 +21,7 @@ angular.module('starter.controllers', [])
 
   // Form data for the login modal
   $scope.results = {};
-  $scope.photo = "";
+  $scope.photo = {};
   $scope.current = 0;
   $scope.length = 0;
   $scope.Math = window.Math;
@@ -61,29 +41,57 @@ angular.module('starter.controllers', [])
     $scope.modal.hide();
   };
 
-  // Button click goes to specificed path
-  $scope.go = function(path) {
+  // Button click goes to specificed path, with a specific photo
+  $scope.visit = function(path) {
+    $scope.photo = { 
+      restaurantName: $scope.currentResult.restaurantName,
+      image: $scope.currentResult.image,
+      address: $scope.currentResult.address,
+      lat: $scope.currentResult.lat,
+      lng: $scope.currentResult.lng,
+      eat24: $scope.currentResult.eat24 == null ? null : $scope.currentResult.eat24
+    };
     $location.path(path)
   };
-
+  $scope.reVisit = function(path, result){
+    console.log(result);
+    $scope.photo = { 
+      restaurantName: result.restaurantName,
+      image: result.image,
+      address: result.address,
+      lat: result.lat,
+      lng: result.lng,
+      eat24: result.eat24 == null ? null : result.eat24
+    };
+    $location.path(path)
+  };
+  $scope.prevAdded = function(){
+    for (var i =0; i < $scope.items.length; i++) {
+      if($scope.photo.image == $scope.items[i].image)
+        return true;
+    }
+    return false;
+  };
+  $scope.isNull = function(){
+    if($scope.photo.eat24 != null)
+      return false;
+    else{
+      return true;
+    }
+  };
+  $scope.onItemDelete = function(index) {
+    $scope.items.splice(index, 1);
+  };
   $scope.openMaps = function() {
-    launchnavigator.navigate([$scope.currentResult.lat, $scope.currentResult.lng]);
+    launchnavigator.navigate([$scope.photo.lat, $scope.photo.lng]);
   };
 
   $scope.openEat24 = function() {
-    if ($scope.currentResult.eat24 != null) {
-      window.open($scope.currentResult.eat24, '_blank', 'location=no');
+    if ($scope.photo.eat24 != null) {
+      window.open($scope.photo.eat24, '_blank', 'location=no');
     }
   };
 
-  // /*call Nearby Search and store in results variable*/
-  // PlacesFactory.getPlaces().success(function(data) {
-  //   $scope.results = data;
-  //   console.log($scope.results);
-  //   $scope.length = $scope.results.results.length;
-  //   getNext();
-  //   console.log($scope.currentResult);
-  // });
  
   var randomString = function(length, chars) {
       var result = '';
@@ -115,8 +123,7 @@ angular.module('starter.controllers', [])
      console.log($scope.results);
      $scope.length = $scope.results.businesses.length;
      getNext();
-     console.log($scope.currentResult);
-  });
+     });
 
   //X button increments current to pull new image
   $scope.next = function() {
@@ -126,33 +133,28 @@ angular.module('starter.controllers', [])
       
       $scope.current = (++$scope.current) % $scope.results.businesses.length;
       getNext();
-      console.log($scope.currentResult)
     }
   };
 
 
   //pulls only the necessary fields from results{}
   var getNext = function() {
+    //currentResult contatins the data for the newest photo shown in the main screen
     $scope.currentResult = {
       // /*restaurant, image, address, coordinates*/
-      // restaurantName: $scope.results.results[$scope.current].name,
-      // image: $scope.results.results[$scope.current].photos != null ? $scope.results.results[$scope.current].photos[0].photo_reference : null,
-      // address: $scope.results.results[$scope.current].vicinity,
-      // lat: $scope.results.results[$scope.current].geometry.location.lat,
-      // lng: $scope.results.results[$scope.current].geometry.location.lng
-     
       restaurantName: $scope.results.businesses[$scope.current].name,
       image: $scope.results.businesses[$scope.current].image_url != null ? $scope.results.businesses[$scope.current].image_url : null,
       address: $scope.results.businesses[$scope.current].location.display_address[0],
       lat: $scope.results.businesses[$scope.current].location.coordinate.latitude,
       lng: $scope.results.businesses[$scope.current].location.coordinate.longitude,
       eat24: $scope.results.businesses[$scope.current].eat24_url
+    
     }
     //fix for small image being loaded
     $scope.currentResult.image = $scope.currentResult.image.replace('ms.jpg', 'o.jpg');
 
-    //call Get Photos API and return an image variable
-    $scope.photo = $scope.currentResult.image;
+    //photo will contain the data for the photo currently being manipulated
+    $scope.photo = $scope.currentResult;
 
   };
 
@@ -170,18 +172,15 @@ angular.module('starter.controllers', [])
 
     if (Boolean(isNew)) {
       $scope.items.push({
-        src: $scope.photo,
-        sub: $scope.currentResult.restaurantName,
-        // address: $scope.results.results[$scope.current].vicinity,
-        // lat: $scope.results.results[$scope.current].geometry.location.lat,
-        // lng: $scope.results.results[$scope.current].geometry.location.lng
-
+        image: $scope.currentResult.image,
+        restaurantName: $scope.currentResult.restaurantName,
         address: $scope.currentResult.address,
         lat:  $scope.currentResult.lat,
-        lng:  $scope.currentResult.lng
+        lng:  $scope.currentResult.lng,
+        eat24: $scope.results.businesses[$scope.current].eat24_url
       });
     }
   $scope.next();
-  $scope.go('app/mainScreen');
+  $scope.visit('app/mainScreen');
   };
 })
