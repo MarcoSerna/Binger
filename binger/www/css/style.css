@@ -55,13 +55,16 @@
 .left {
 	float: left;
 	position: relative;
+	margin-left: 10px;
   width: 174px;
 }
 
 .right {
+	float: right;
 	position: relative;
 	text-align: left;
-	margin-left: 186px;
+	margin-right: 10px;
+	width: 174px;
 }
 
 .font-style {
