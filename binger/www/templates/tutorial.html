@@ -1,25 +1,28 @@
 <ion-modal-view class="tutorial-screen">
 	<ion-content>
-		<div style="margin-left:186px; margin-top:43px; height:230px;">
+		 <div style="margin-left:360px; margin-top:43px; height:0px;"> 
+			<p class="arrow-size ion-ios-arrow-thin-up"></p>
+		 </div>
+		 <div style="margin-left:186px; margin-top:43px; height:230px;">
 			<p class="font-style">Tap on the clipboard for the queue screen</p>
-	  </div>
+	 	 </div>
 
 	  <div class="left">
 			<p class="arrow-size ion-ios-arrow-thin-left"></p> 
-			<p class="font-style">Swipe left or tap on the red button for dislike</p>
+			<p class="font-style" align="center"> Swipe left or tap the red button for dislike</p>
 		</div>
 
 		<div class="right">
 			<p class="arrow-size ion-ios-arrow-thin-right"></p>
-			<p class="font-style">Swipe right or tap on the green button for like</p>
+			<p class="font-style" align="center">Swipe right or tap the green button for like</p>
 		</div>
 
-		</br></br></br></br></br>
-
+	</ion-content>
+	<div style="position: absolute; bottom: 20px; width: 100%">
 		<div class="button-centered">
 			<button class="button button-dark button-pill" ng-click="closeTutorial()">
 				Close
 			</button>
-		</div>
-	</ion-content
+		</div>		
+    </div>
 </ion-modal-view>
