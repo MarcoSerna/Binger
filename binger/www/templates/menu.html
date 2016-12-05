@@ -31,7 +31,7 @@
     </ion-header-bar>
     <ion-content>  
       <ion-list show-delete="showDelete">
-        <ion-item ng-repeat="pics in items " class="item-thumbnail-left" ng-click="reVisit('app/restaurantDetailScreen',{{pics}})">
+        <ion-item ng-repeat="pics in items " class="item-thumbnail-left" ng-click="reVisit('app/restaurantDetailScreen',{{pics}})" menu-toggle="right">
           <img ng-src="{{pics.image}}">
           <h2>{{pics.restaurantName}}</h2>
 

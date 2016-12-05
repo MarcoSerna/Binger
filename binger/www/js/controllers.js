@@ -53,6 +53,7 @@ angular.module('starter.controllers', [])
     };
     $location.path(path)
   };
+
   $scope.reVisit = function(path, result){
     console.log(result);
     $scope.photo = { 
@@ -65,6 +66,7 @@ angular.module('starter.controllers', [])
     };
     $location.path(path)
   };
+
   $scope.prevAdded = function(){
     for (var i =0; i < $scope.items.length; i++) {
       if($scope.photo.image == $scope.items[i].image)
@@ -72,6 +74,7 @@ angular.module('starter.controllers', [])
     }
     return false;
   };
+
   $scope.isNull = function(){
     if($scope.photo.eat24 != null)
       return false;
@@ -79,9 +82,11 @@ angular.module('starter.controllers', [])
       return true;
     }
   };
+
   $scope.onItemDelete = function(index) {
     $scope.items.splice(index, 1);
   };
+
   $scope.openMaps = function() {
     launchnavigator.navigate([$scope.photo.lat, $scope.photo.lng]);
   };
@@ -92,7 +97,6 @@ angular.module('starter.controllers', [])
     }
   };
 
- 
   var randomString = function(length, chars) {
       var result = '';
       for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
